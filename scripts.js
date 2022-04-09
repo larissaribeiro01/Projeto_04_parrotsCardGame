@@ -24,7 +24,7 @@ for (let i=0; i<numCartas; i++) {
     document.querySelector(".allCards").innerHTML +=
     `<div class="card" >
         <div class="frontFace face first" onclick="turnCards(this)" >
-            <img src="Imagens/metalparrot.gif" />
+            <img src="${gameCards[i].img}" />
         </div>
         <div class="backFace face second" onclick="turnCards(this)">
             <img src="Imagens/front.png" />
