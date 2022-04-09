@@ -5,7 +5,7 @@ const baralho =[{img: 'Imagens/metalparrot.gif'},{img: 'Imagens/metalparrot.gif'
 {img: 'Imagens/unicornparrot.gif'}, {img: 'Imagens/unicornparrot.gif'}]
 
 const jogadas =[]
-
+let endGame=0
 let numCartas=Number(prompt ("Com quantas cartas você quer jogar?"))
 let rest= numCartas%2
 while (rest!=0 || numCartas<4 || numCartas>14) {
@@ -40,8 +40,7 @@ for (let i=0; i<numCartas; i++) {
 function comparaCards () {
     let n=jogadas.length
     if (n%2==0) {
-        
-        if (jogadas[n-1].imagem!==jogadas[n-2].imagem) {
+            if (jogadas[n-1].imagem!==jogadas[n-2].imagem) {
             setTimeout (function () {
             jogadas[n-1].frente.classList.remove("backFace");
             jogadas[n-1].frente.classList.add("frontFace");
@@ -53,7 +52,10 @@ function comparaCards () {
             jogadas[n-2].verso.classList.add("backFace");
             }, 1000);
 
+        } else {
+            endGame+=2;
         }
+    
     }
 }
 
@@ -70,6 +72,12 @@ function turnCards (elemento) {
     jogadas.push(selectCard)
 
     comparaCards();
+    gameOver();
 
 
 }
+function gameOver () {
+    if (endGame===numCartas) {
+        alert (`Você ganhou em ${jogadas.length} jogadas`)
+    }
+} 
