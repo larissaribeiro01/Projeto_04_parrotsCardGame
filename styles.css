@@ -81,11 +81,14 @@ h1 {
 
 
 
-@media (max-width: 614px) {
+  @media (max-width: 614px) {
     h1 {
         font-size: 44px;
     }
 
-    
-    
+    .allCards {
+        flex-direction: column;
+        height: fit-content;
+        
+    }
 }

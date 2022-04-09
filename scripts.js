@@ -4,6 +4,7 @@ const baralho =[{img: 'Imagens/metalparrot.gif'},{img: 'Imagens/metalparrot.gif'
 {img: 'Imagens/tripletsparrot.gif'},{img: 'Imagens/tripletsparrot.gif'},
 {img: 'Imagens/unicornparrot.gif'}, {img: 'Imagens/unicornparrot.gif'}]
 
+const jogadas =[]
 
 let numCartas=Number(prompt ("Com quantas cartas você quer jogar?"))
 let rest= numCartas%2
@@ -23,10 +24,10 @@ gameCards=gameCards.sort(comparador);
 for (let i=0; i<numCartas; i++) {
     document.querySelector(".allCards").innerHTML +=
     `<div class="card" >
-        <div class="frontFace face first" onclick="turnCards(this)" >
+        <div class="frontFace face front" onclick="turnCards(this)" >
             <img src="${gameCards[i].img}" />
         </div>
-        <div class="backFace face second" onclick="turnCards(this)">
+        <div class="backFace face back" onclick="turnCards(this)">
             <img src="Imagens/front.png" />
             
             
@@ -36,16 +37,39 @@ for (let i=0; i<numCartas; i++) {
 
 
 
+function comparaCards () {
+    let n=jogadas.length
+    if (n%2==0) {
+        
+        if (jogadas[n-1].imagem!==jogadas[n-2].imagem) {
+            setTimeout (function () {
+            jogadas[n-1].frente.classList.remove("backFace");
+            jogadas[n-1].frente.classList.add("frontFace");
+            jogadas[n-1].verso.classList.remove("frontFace");
+            jogadas[n-1].verso.classList.add("backFace");
+            jogadas[n-2].frente.classList.remove("backFace");
+            jogadas[n-2].frente.classList.add("frontFace");
+            jogadas[n-2].verso.classList.remove("frontFace");
+            jogadas[n-2].verso.classList.add("backFace");
+            }, 1000);
 
-function turnCards (elemento) {
-    elemento.parentNode.querySelector(".face.first").classList.remove('frontFace')
-    elemento.parentNode.querySelector(".face.first").classList.add('backFace')
-    elemento.parentNode.querySelector(".face.second").classList.remove('backFace')
-    elemento.parentNode.querySelector(".face.second").classList.add('frontFace')
-    
-    
-    
+        }
+    }
+}
 
+
+function turnCards (elemento) { 
     
+    elemento.parentNode.querySelector(".front").classList.remove('frontFace')
+    elemento.parentNode.querySelector(".front").classList.add('backFace')
+    elemento.parentNode.querySelector(".back").classList.remove('backFace')
+    elemento.parentNode.querySelector(".back").classList.add('frontFace')
+    
+    selectCard={imagem: elemento.parentNode.querySelector(".front").innerHTML , 
+    frente: elemento.parentNode.querySelector(".front"), verso: elemento.parentNode.querySelector(".back") }
+    jogadas.push(selectCard)
+
+    comparaCards();
+
 
 }
