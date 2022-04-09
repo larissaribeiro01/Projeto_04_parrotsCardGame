@@ -4,8 +4,11 @@ const baralho =[{img: 'Imagens/metalparrot.gif'},{img: 'Imagens/metalparrot.gif'
 {img: 'Imagens/tripletsparrot.gif'},{img: 'Imagens/tripletsparrot.gif'},
 {img: 'Imagens/unicornparrot.gif'}, {img: 'Imagens/unicornparrot.gif'}]
 
-const jogadas =[]
-let endGame=0
+const jogadas =[];
+let endGame=0;
+let contSeg=0;
+contSegundos ();
+
 let numCartas=Number(prompt ("Com quantas cartas você quer jogar?"))
 let rest= numCartas%2
 while (rest!=0 || numCartas<4 || numCartas>14) {
@@ -78,6 +81,18 @@ function turnCards (elemento) {
 }
 function gameOver () {
     if (endGame===numCartas) {
-        alert (`Você ganhou em ${jogadas.length} jogadas`)
+        alert (`Você ganhou em ${jogadas.length} jogadas feitas em ${contSeg-1} segundos`)
+        clearInterval(ID)
+        resposta=prompt("Deseja jogar novamente? Responda com sim ou nao.")
+        if (resposta==="sim") {
+            document.location.reload()
+        }
     }
 } 
+
+function contSegundos() {
+    ID = setInterval(function () {
+      document.querySelector(".relogio").innerHTML = contSeg++ +" s";
+        }, 1000);
+  }
+  
